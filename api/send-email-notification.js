@@ -4,7 +4,20 @@
 import nodemailer from 'nodemailer';
 import { createClient } from '@supabase/supabase-js';
 
-// CORS headers
+// CORS headers // Email validation function to prevent Header Injection
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function validateEmail(email) {
+  if (!email || typeof email !== 'string') {
+    return false;
+  }
+  // Check for header injection attempts (\n, \r, \t)
+  if (email.includes('\n') || email.includes('\r') || email.includes('\t')) {
+    console.warn('Email header injection attempt detected:', email);
+    return false;
+  }
+  return EMAIL_REGEX.test(email);
+}
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
@@ -63,7 +76,14 @@ export default async function handler(req, res) {
 
   try {
     const { type, slug, profileOwnerEmail, profileName, testEmail } = req.body;
-
+// VALIDATE EMAILS FIRST!
+  if (testEmail && !validateEmail(testEmail)) {
+    return res.status(400).json({ error: 'Invalid test email format or injection attempt blocked.' });
+  }
+  
+  if (profileOwnerEmail && !validateEmail(profileOwnerEmail)) {
+    return res.status(400).json({ error: 'Invalid owner email format or injection attempt blocked.' });
+  }
     // Configure Gmail transporter
     const transporter = nodemailer.createTransport({
       service: 'gmail',
