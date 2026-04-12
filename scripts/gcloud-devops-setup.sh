@@ -14,7 +14,12 @@ set -e
 PROJECT_ID="hushh-devops-notifier"
 SERVICE_ACCOUNT_NAME="hushh-github-notifier"
 DISPLAY_NAME="Hushh GitHub Notifier"
-KEY_FILE="./hushh-github-notifier-key.json"
+# Secure temporary directory for credentials
+TEMP_DIR=$(mktemp -d)
+KEY_FILE="$TEMP_DIR/hushh-github-notifier-key.json"
+
+# Self-destruct trap: Deletes the key the exact second the script finishes
+trap 'rm -rf "$TEMP_DIR"; echo -e "\n[SECURITY CHECK]: Temporary credential files securely deleted from disk."' EXIT
 
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "🚀 Hushh DevOps Notification System - Google Cloud Setup"
@@ -112,7 +117,9 @@ echo "   - Client ID: (Get from service account details in GCP Console)"
 echo "   - OAuth Scopes: https://www.googleapis.com/auth/gmail.send"
 echo ""
 echo "2. Add Service Account Key to Supabase Secrets:"
-echo "   supabase secrets set GOOGLE_SERVICE_ACCOUNT_JSON=\"\$(cat $KEY_FILE | base64)\""
+          B64_KEY=$(cat "$KEY_FILE" | base64 -w 0 2>/dev/null || cat "$KEY_FILE" | base64)
+echo "  Run this exact command in your terminal:"
+echo "  supabase secrets set GOOGLE_SERVICE_ACCOUNT_JSON=\"$B64_KEY\""
 echo ""
 echo "3. Add GitHub Webhook Secret to Supabase:"
 echo "   supabase secrets set GITHUB_WEBHOOK_SECRET=\"$(openssl rand -hex 20)\""
