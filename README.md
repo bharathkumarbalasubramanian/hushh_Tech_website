@@ -1,73 +1,44 @@
-# Hushh Tech Website
+Run production environments.
 
-This repository is the public web and app wrapper for Hushh product surfaces. It contains the frontend, serverless wrapper routes, Supabase assets, tests, and documentation that shape the public experience around Hushh production services.
+🔍 Bug #1: Docker Build Sequence & Layer Optimization
+Problem: The original Dockerfile.gcp fell into a "Sequential Trap." Environment variables required for the Vite frontend build were not being injected early enough, causing the production build to fail or default to empty configurations.
 
-Repository URL: https://github.com/hushh-labs/hushh_Tech_website
+The Fix:
 
-## What this repo is
+Instruction Reordering: Restructured the Docker layers to ensure ARG and ENV declarations precede the build command.
 
-- A public wrapper and integration layer around Hushh web experiences
-- A place for UI, UX, API wrapper, docs, test, and safe infrastructure contributions
-- A production-backed repository that is maintained with protected branches and maintainer-controlled deploys
+Layer Caching: Optimized the copy sequence to leverage Docker layer caching, significantly reducing build times for future deployments.
 
-## What this repo is not
+Runtime Bridging: Implemented a robust mapping system to ensure build-time arguments are available to the Node.js runtime.
 
-- A source of production secrets, service-account keys, or private credentials
-- A promise that every internal service or deployment detail is exposed here
-- A safe place to commit `.env` files, `.p8` keys, service-account JSON, or vendor API keys
+🚀 Bug #2: CI/CD Pipeline & Environment Bridging
+Problem: The cloudbuild.yaml configuration lacked the necessary mapping to bridge Google Cloud Build substitution variables into the Cloud Run container environment. This resulted in "Undefined" errors for Supabase and Gemini API connections.
 
-## Production model
+The Fix:
 
-- Production secrets belong in GCP Secret Manager or the minimal server-side secret store needed for a specific runtime
-- `main` is protected and intended to move through pull requests, checks, and maintainer review
-- Public contributors should assume that production infra, credentials, and secret rotation stay maintainer-owned
+YAML Schema Refinement: Updated the deploy step in cloudbuild.yaml to include explicit --set-env-vars flags.
 
-## Safe contribution areas
+Variable Sanitization: Implemented a consistent naming convention between GCP Substitution variables (e.g., _GEMINI_API_KEY) and internal application environment variables.
 
-- frontend components and routes under `src/`
-- wrapper APIs under `api/`
-- docs, issue templates, and contributor tooling
-- tests and smoke coverage
-- safe build, CI, and repo-health improvements that do not expose or require secrets
+Production Readiness: Verified that all 3rd-party integration keys are securely passed without being hardcoded into the repository.
 
-## Maintainer-owned or sensitive areas
+🛡 Bug #3: Cloud-Native Authentication (Google Wallet API)
+Problem: The backend logic was reliant on a physical service-account.json file. While this works in local development, it is a security risk and an architectural failure in Cloud Run, where the file system is ephemeral and secrets should be managed via IAM.
 
-- secret rotation and vendor credential management
-- deploy credentials and service-role material
-- production GCP and Supabase configuration
-- destructive git history rewrites and incident/security response
+The Fix:
 
-## Quick start
+ADC Implementation: Refactored api/google-wallet-pass.js to utilize Application Default Credentials (ADC) via the google-auth-library.
 
-```bash
-npm ci
-npm run test
-npm run security:gitleaks
-```
+Dynamic Identity Resolution: The system now automatically detects its environment. It uses local JWT keys during development and inherits the Service Account Identity of the Cloud Run instance in production.
 
-See:
+Error Resiliency: Added sanitization logic for RSA Private Keys to handle newline character escaping (\n) frequently encountered in environment variable injection.
 
-- [CONTRIBUTING.md](/Users/ankitkumarsingh/hushhTech/CONTRIBUTING.md)
-- [SECURITY.md](/Users/ankitkumarsingh/hushhTech/SECURITY.md)
-- [CODE_OF_CONDUCT.md](/Users/ankitkumarsingh/hushhTech/CODE_OF_CONDUCT.md)
-- [SUPPORT.md](/Users/ankitkumarsingh/hushhTech/SUPPORT.md)
-- [LICENSE](/Users/ankitkumarsingh/hushhTech/LICENSE)
+✅ Impact & Validation
+Zero-Config Deployment: The project can now be deployed to any GCP project simply by setting the Build Trigger substitutions.
 
-## Project layout
+Enhanced Security: Removed the need for physical service account keys within the container, aligning with SOC2 and PoLP (Principle of Least Privilege) security standards.
 
-- `src/`: Active frontend code and route modules
-- `api/`: Serverless wrapper endpoints
-- `supabase/`: Edge functions, migrations, and local Supabase assets
-- `cloud-run/`: Standalone service deployments
-- `scripts/`: Operational and repo-maintenance scripts
-- `docs/`: Architecture, runbooks, and contributor-facing documentation
-- `tests/`: Vitest coverage and route-level verification
-- `public/`: Static assets served directly by Vite
+Build Integrity: Guaranteed that the Vite frontend is correctly compiled with production-ready API endpoints.
 
-## Repo conventions
-
-- Keep runtime app code in `src/`
-- Keep timestamped DB changes in `supabase/migrations/`
-- Keep historical or manual SQL in `supabase/manual-sql/`
-- Keep repo-entrypoint files in the root; move product docs into `docs/`
-- Prefer PR-sized, decision-clear changes over broad mixed diffs
+Contributor: Bharath Kumar B.
+Focus: AI Software Engineering & DevOps Optimization
