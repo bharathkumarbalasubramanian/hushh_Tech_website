@@ -1,0 +1,623 @@
+/* Google Fonts — DM Sans kept for onboarding/utility classes */
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-main: "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-main);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/*
+ * Headings — no forced font-family here.
+ * Tailwind classes (font-serif / font-sans) control the font per element.
+ */
+
+/* Material Symbols Icons - Override font-family for icon fonts */
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined" !important;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "liga";
+}
+
+/* DM Sans utility classes - variable weight from 300 to 700 */
+.red-hat-text-light {
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.red-hat-text-regular {
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.red-hat-text-medium {
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.red-hat-text-semibold {
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.red-hat-text-bold {
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.gradient-bg {
+  background: linear-gradient(to right, #7a7a7e, #ffffff);
+}
+
+.gradient {
+  background: linear-gradient(to right, #7a7a7e, #ffffff);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.color-gradient-bg {
+  background: linear-gradient(to right, #e54d60, #a342ff);
+
+}
+
+.color-gradient {
+  background: linear-gradient(to right, #e54d60, #a342ff);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.hushh-gradient {
+  background: linear-gradient(265.3deg, #e54d60 8.81%, #a342ff 94.26%);
+  -webkit-background-clip: text;
+  color: transparent;
+  border-color: linear-gradient(265.3deg, #e54d60 8.81%, #a342ff 94.26%);
+}
+
+.hushh-gradient-bg {
+  background: linear-gradient(265.3deg, #e54d60 8.81%, #a342ff 94.26%);
+}
+
+.blue-gradient-text {
+  background-image: linear-gradient(to right, #00A9E0, #6DD3EF);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline;
+}
+
+.blue-gradient-bg {
+  background: linear-gradient(to right, #00A9E0, #6DD3EF);
+}
+
+/* Top marquee banner - inside fixed header, no need for own fixed positioning */
+.marquee-container {
+  position: relative;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: linear-gradient(180deg, #f9fbff 0%, #f5f7fb 100%);
+  color: #0f172a;
+  font-family: var(--font-main), sans-serif;
+  font-size: 13.5px;
+  line-height: 1.65;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.marquee-track {
+  display: inline-flex;
+  min-width: max-content;
+  white-space: nowrap;
+  padding: 12px 48px;
+  /* only horizontal padding now */
+  animation: marquee-slide 24s linear infinite;
+}
+
+
+.marquee-track .marquee-chunk {
+  display: inline-flex;
+  gap: 8px;
+  padding-left: 48px;
+  padding-right: 140px;
+  /* ⬅️ extra gap between end and next "Introducing..." */
+}
+
+.marquee-prefix {
+  background-image: linear-gradient(to right, #00A9E0, #4BC0C8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 600;
+}
+
+.marquee-body {
+  color: #0f172a;
+  letter-spacing: 0.01em;
+  word-spacing: 0;
+}
+
+.ticker {
+  white-space: nowrap;
+}
+
+.ticker-sep {
+  padding: 0 10px 0 4px;
+}
+
+.marquee-spacer {
+  width: 100%;
+}
+
+
+.marquee-container::before,
+.marquee-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 40px;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.marquee-container::before {
+  left: 0;
+  background: linear-gradient(to right, #f9fbff 0%, rgba(249, 251, 255, 0) 100%);
+}
+
+.marquee-container::after {
+  right: 0;
+  background: linear-gradient(to left, #f9fbff 0%, rgba(249, 251, 255, 0) 100%);
+}
+
+@keyframes marquee-slide {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* ===========================================
+   RTL (Right-to-Left) Language Support
+   For Arabic and other RTL languages
+   =========================================== */
+
+/* When html has dir="rtl" attribute */
+html[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+}
+
+/* Flip flex directions for RTL */
+html[dir="rtl"] .flex-row {
+  flex-direction: row-reverse;
+}
+
+/* Navbar adjustments for RTL */
+html[dir="rtl"] nav .flex.justify-between {
+  flex-direction: row-reverse;
+}
+
+html[dir="rtl"] nav .space-x-6 > * + * {
+  margin-left: 0;
+  margin-right: 1.5rem;
+}
+
+/* Dropdown positioning for RTL */
+html[dir="rtl"] .absolute.right-0 {
+  right: auto;
+  left: 0;
+}
+
+html[dir="rtl"] .absolute.left-0 {
+  left: auto;
+  right: 0;
+}
+
+/* Icon margins for RTL */
+html[dir="rtl"] .mr-2 {
+  margin-right: 0;
+  margin-left: 0.5rem;
+}
+
+html[dir="rtl"] .ml-1 {
+  margin-left: 0;
+  margin-right: 0.25rem;
+}
+
+html[dir="rtl"] .ml-2 {
+  margin-left: 0;
+  margin-right: 0.5rem;
+}
+
+/* Padding adjustments for RTL */
+html[dir="rtl"] .pl-4 {
+  padding-left: 0;
+  padding-right: 1rem;
+}
+
+html[dir="rtl"] .pr-4 {
+  padding-right: 0;
+  padding-left: 1rem;
+}
+
+/* Text alignment overrides */
+html[dir="rtl"] .text-left {
+  text-align: right;
+}
+
+html[dir="rtl"] .text-right {
+  text-align: left;
+}
+
+/* Fixed drawer positioning for RTL */
+html[dir="rtl"] .fixed.left-0 {
+  left: auto;
+  right: 0;
+}
+
+/* Active indicator positioning for RTL */
+html[dir="rtl"] .absolute.left-\[-12px\] {
+  left: auto;
+  right: -12px;
+}
+
+/* Marquee animation for RTL - reverse direction */
+html[dir="rtl"] .marquee-track {
+  animation: marquee-slide-rtl 24s linear infinite;
+}
+
+@keyframes marquee-slide-rtl {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Language switcher dropdown positioning */
+html[dir="rtl"] .language-dropdown {
+  left: 0;
+  right: auto;
+}
+
+/* Arabic font support */
+html[lang="ar"] {
+  font-family: "DM Sans", "Noto Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+}
+
+/* Chinese font support */
+html[lang="zh"] {
+  font-family: "DM Sans", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+/* Transition for smooth RTL/LTR switching */
+html {
+  transition: direction 0.2s ease;
+}
+
+/* ===========================================
+   Onboarding Mobile Responsiveness
+   =========================================== */
+
+.onboarding-html,
+.onboarding-body {
+  background: #ffffff;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.onboarding-body {
+  font-family: "Manrope", "DM Sans", "Segoe UI", Tahoma, sans-serif;
+  color: #0f172a;
+}
+
+/* Onboarding pages that use page-level scrolling (no .onboarding-shell main scroller).
+   Add/remove "onboarding-page-scroll" on html & body via useEffect in each step. */
+html.onboarding-page-scroll,
+body.onboarding-page-scroll {
+  height: auto !important;
+  min-height: 100dvh;
+  overflow-y: auto !important;
+  overflow-x: hidden;
+}
+
+.onboarding-shell {
+  --onboarding-primary: #2b8cee;
+  --onboarding-primary-deep: #2070c0;
+  --onboarding-shell-max-width: 500px;
+  --onboarding-top-space: 7rem;
+  --onboarding-footer-space: calc(10rem + env(safe-area-inset-bottom, 0px));
+  --onboarding-border-color: rgba(15, 23, 42, 0.08);
+
+  position: relative;
+  min-height: calc(100dvh - var(--onboarding-top-space)) !important;
+  height: auto;
+  width: min(100%, var(--onboarding-shell-max-width));
+  max-width: var(--onboarding-shell-max-width);
+  overflow-x: hidden;
+  overflow-y: auto;
+  border: 1px solid var(--onboarding-border-color);
+  border-radius: clamp(0px, 2vw, 24px);
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+  box-shadow: 0 20px 56px rgba(15, 23, 42, 0.16);
+}
+
+.onboarding-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(65% 40% at 100% 0%, rgba(43, 140, 238, 0.11), transparent 65%),
+    radial-gradient(50% 30% at 0% 100%, rgba(56, 189, 248, 0.08), transparent 72%);
+  z-index: 0;
+}
+
+.onboarding-shell > header,
+.onboarding-shell > main {
+  position: relative;
+  z-index: 1;
+}
+
+.onboarding-shell > header {
+  background: rgba(255, 255, 255, 0.86) !important;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.onboarding-shell > header button {
+  color: #0f172a;
+}
+
+.onboarding-shell > header button:hover {
+  background: rgba(43, 140, 238, 0.08);
+  color: var(--onboarding-primary-deep);
+}
+
+.onboarding-shell main {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto !important;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  scrollbar-width: none;
+  padding-bottom: calc(var(--onboarding-footer-space) + 0.1rem) !important;
+  scroll-padding-bottom: calc(var(--onboarding-footer-space) + 0.1rem);
+}
+
+.onboarding-shell main::-webkit-scrollbar {
+  display: none;
+}
+
+.onboarding-shell main h1 {
+  font-size: clamp(1.28rem, 1.04rem + 0.95vw, 1.6rem) !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.022em;
+}
+
+.onboarding-shell main h2 {
+  letter-spacing: -0.018em;
+}
+
+.onboarding-shell main .grid {
+  min-width: 0;
+}
+
+.onboarding-shell main .grid > * {
+  min-width: 0;
+}
+
+.onboarding-shell main select,
+.onboarding-shell main input,
+.onboarding-shell main textarea {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.onboarding-shell main select {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.onboarding-shell main input,
+.onboarding-shell main select,
+.onboarding-shell main textarea {
+  border-radius: 0.85rem;
+}
+
+.onboarding-shell main .rounded-xl,
+.onboarding-shell main .rounded-2xl {
+  border-color: rgba(148, 163, 184, 0.26);
+}
+
+.onboarding-shell [data-onboarding-footer] {
+  position: fixed !important;
+  bottom: 0 !important;
+  top: auto !important;
+  left: 50% !important;
+  right: auto !important;
+  transform: translateX(-50%) translateZ(0);
+  margin: 0 !important;
+  z-index: 60 !important;
+  width: min(100%, var(--onboarding-shell-max-width));
+  max-width: var(--onboarding-shell-max-width) !important;
+  border-top: 1px solid rgba(148, 163, 184, 0.24);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.94) 0%, rgba(248, 251, 255, 0.98) 100%) !important;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 -8px 28px rgba(15, 23, 42, 0.08) !important;
+  padding-left: 0.95rem !important;
+  padding-right: 0.95rem !important;
+  padding-top: 0.58rem !important;
+  padding-bottom: calc(0.58rem + env(safe-area-inset-bottom, 0px)) !important;
+}
+
+.onboarding-shell [data-onboarding-footer] [data-onboarding-cta] {
+  box-sizing: border-box;
+  border-radius: 9999px !important;
+  height: 46px !important;
+  min-height: 46px;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  box-shadow: 0 10px 22px rgba(43, 140, 238, 0.24);
+}
+
+.onboarding-shell [data-onboarding-footer] [data-onboarding-cta]:disabled,
+.onboarding-shell [data-onboarding-footer] [data-onboarding-cta][aria-disabled="true"] {
+  box-shadow: none !important;
+}
+
+.onboarding-shell [data-onboarding-footer] button.rounded-full:not(.bg-transparent) {
+  box-sizing: border-box;
+  border-radius: 9999px !important;
+  height: 46px !important;
+  min-height: 46px;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.onboarding-shell [data-onboarding-footer].flex.flex-col,
+.onboarding-shell [data-onboarding-footer] .flex.flex-col {
+  gap: 0.45rem !important;
+}
+
+@media (min-width: 640px) {
+  .onboarding-shell [data-onboarding-footer].flex.flex-col,
+  .onboarding-shell [data-onboarding-footer] .flex.flex-col {
+    gap: 0.55rem !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .onboarding-shell {
+    --onboarding-shell-max-width: 980px;
+    border-radius: 24px;
+    box-shadow: 0 26px 64px rgba(15, 23, 42, 0.14);
+  }
+
+  .onboarding-shell > header {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .onboarding-shell {
+    max-width: 100% !important;
+    width: 100% !important;
+    border-left-width: 0 !important;
+    border-right-width: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+
+  .onboarding-shell [data-onboarding-footer] {
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    padding-left: 0.85rem !important;
+    padding-right: 0.85rem !important;
+    padding-top: 0.5rem !important;
+    padding-bottom: calc(0.44rem + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  .onboarding-shell [data-onboarding-footer] [data-onboarding-cta] {
+    height: 44px !important;
+    min-height: 44px;
+  }
+
+  .onboarding-shell [data-onboarding-footer] button.rounded-full:not(.bg-transparent) {
+    height: 44px !important;
+    min-height: 44px;
+  }
+
+  .onboarding-shell main {
+    padding-bottom: calc(var(--onboarding-footer-space) + 0.05rem) !important;
+    scroll-padding-bottom: calc(var(--onboarding-footer-space) + 0.05rem);
+  }
+}
+
+/* Home page font overrides — Manrope body + Playfair Display headings + JetBrains Mono numbers */
+[data-page="home"],
+[data-page="home"] *:not(.material-symbols-outlined) {
+  font-family: "Manrope", sans-serif !important;
+}
+[data-page="home"] .font-display,
+[data-page="home"] .font-display *,
+[data-page="home"] .font-serif,
+[data-page="home"] .font-serif * {
+  font-family: "Playfair Display", serif !important;
+}
+[data-page="home"] .font-mono,
+[data-page="home"] .font-mono * {
+  font-family: "JetBrains Mono", monospace !important;
+}
+
+/* Thin / filled icon variants for Material Symbols */
+.thin-icon {
+  font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+}
+.filled-icon {
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Hide scrollbar utility — user swipes instead */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Global responsive safety */
+html,
+body,
+#root {
+  max-width: 100%;
+  overflow-x: hidden;
+}

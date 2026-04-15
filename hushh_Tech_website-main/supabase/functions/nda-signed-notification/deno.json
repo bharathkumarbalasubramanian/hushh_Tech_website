@@ -1,0 +1,11 @@
+{
+  "name": "nda-signed-notification",
+  "version": "1.0.0",
+  "exports": "./index.ts",
+  "compilerOptions": {
+    "strict": true
+  },
+  "imports": {
+    "std/": "https://deno.land/std@0.168.0/"
+  }
+}

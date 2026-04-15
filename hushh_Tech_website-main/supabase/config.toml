@@ -1,0 +1,50 @@
+# Supabase Configuration File
+# For full documentation, visit: https://supabase.com/docs/guides/cli/config
+
+project_id = "ibsisfnjxeowvdtvgzff"
+
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[db]
+port = 54322
+shadow_port = 54320
+major_version = 15
+
+[studio]
+enabled = true
+port = 54323
+
+[functions.generate-investor-profile]
+verify_jwt = true
+
+# Auth Configuration - Fix redirect to hushhtech.com
+[auth]
+enabled = true
+site_url = "https://hushhtech.com"
+additional_redirect_urls = [
+  "https://hushhtech.com/auth/callback",
+  "https://hushhtech.com/auth/callback?redirect=/hushh-ai",
+  "https://hushhtech.com/**",
+  "https://uat.hushhtech.com/auth/callback",
+  "https://uat.hushhtech.com/**",
+  "https://www.hushhtech.com/auth/callback",
+  "https://www.hushhtech.com/auth/callback?redirect=/hushh-ai",
+  "https://www.hushhtech.com/**",
+  "hushh://auth/callback",
+  "hushh://**",
+  "ai.hushh.app://",
+  "ai.hushh.app://**",
+  "capacitor://localhost",
+  "http://localhost:3000/**",
+  "http://localhost:5173/**"
+]
+
+# Note: Google and Apple OAuth are configured in Supabase Dashboard
+# Settings -> Authentication -> Providers
+# These are NOT needed in config.toml for Edge Function deployments
+# The actual OAuth credentials are securely stored in the Dashboard

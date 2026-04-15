@@ -1,0 +1,18 @@
+title = "HushhTech gitleaks config"
+
+[allowlist]
+description = "Ignore docs, examples, and generated assets that may contain placeholders."
+paths = [
+  '''^\.git/''',
+  '''^\.pre-commit-cache/''',
+  '''^docs/''',
+  '''^dist/''',
+  '''^public/''',
+  '''^files/''',
+  '''^node_modules/''',
+  '''^playstore-assets/''',
+  '''^src/components/images/''',
+  '''^\.planning/''',
+  '''^supabase/\.temp/''',
+  '''^\.env\.local\.example$'''
+]

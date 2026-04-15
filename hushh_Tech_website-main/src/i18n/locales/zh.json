@@ -1,0 +1,129 @@
+{
+  "nav": {
+    "ourPhilosophy": "我们的理念",
+    "fundA": "基金A",
+    "community": "社区",
+    "faq": "常见问题",
+    "contact": "联系我们",
+    "joinUs": "加入我们",
+    "careers": "职业机会",
+    "benefits": "福利待遇",
+    "login": "登录",
+    "logout": "退出登录",
+    "viewProfile": "查看个人资料",
+    "home": "首页",
+    "kycStudio": "KYC工作室 Alpha",
+    "deleteAccount": "删除账户"
+  },
+  "deleteAccount": {
+    "title": "删除账户",
+    "warningMessage": "此操作是永久性的，无法撤销。您的产品数据将被永久删除，系统可能仅保留最少量的去标识化付款审计记录。",
+    "willDelete": "这将永久删除：",
+    "deleteItem1": "您的账户和个人资料信息",
+    "deleteItem2": "所有投资者数据和偏好设置",
+    "deleteItem3": "您的聊天记录和消息",
+    "deleteItem4": "所有相关文档和验证记录",
+    "confirmPrompt": "输入 DELETE 确认",
+    "cancel": "取消",
+    "confirmDelete": "删除账户",
+    "deleting": "正在删除...",
+    "successTitle": "账户已删除",
+    "successMessage": "您的账户和产品数据已被永久删除。系统可能仅保留最少量的去标识化付款审计记录。",
+    "errorTitle": "删除失败",
+    "errorMessage": "无法删除您的账户。请重试或联系支持团队。"
+  },
+  "hero": {
+    "eyebrow": "投资未来。",
+    "mainTitle": "人工智能驱动的伯克希尔·哈撒韦。",
+    "mainSubtitle": "我们结合人工智能和人类专业知识，投资于卓越的企业，创造长期价值。",
+    "discoverFundA": "探索基金A",
+    "becomeInvestor": "成为投资者",
+    "investorProfileLabel": "投资者档案",
+    "fundATitle": "基金A：我们愿景的开端。",
+    "fundADescription": "基金A于2024年推出，是我们以人工智能为核心的收益工具——系统化、规范化，专为持久价值创造而设计。",
+    "targetingIRR": "目标",
+    "netIRR": "18-23%净内部收益率",
+    "withOur": "采用我们的",
+    "sellTheWall": "卖墙策略",
+    "approach": "方法。",
+    "aiFirstInvesting": "人工智能优先的系统化收益投资。",
+    "provenRiskFramework": "经过验证的风险框架，专为长期价值创造而设计。",
+    "targetNetIRR": "目标净内部收益率",
+    "inception": "成立时间",
+    "disclaimer": "*灵感来源于自然平衡和经过验证的量化策略。",
+    "learnMoreFundA": "了解更多关于基金A",
+    "readyToTransform": "准备好改变您的投资策略了吗？",
+    "joinInvestors": "加入有远见的投资者行列，通过我们的人工智能驱动方法积累财富。",
+    "learnAboutMission": "了解我们的使命",
+    "contactUsToday": "立即联系我们"
+  },
+  "common": {
+    "welcome": "欢迎来到 Hushh Technologies",
+    "signInMessage": "感谢您的登录。",
+    "loading": "加载中...",
+    "submit": "提交",
+    "cancel": "取消",
+    "save": "保存",
+    "edit": "编辑",
+    "delete": "删除",
+    "back": "返回",
+    "next": "下一步",
+    "continue": "继续",
+    "close": "关闭",
+    "yes": "是",
+    "no": "否",
+    "error": "错误",
+    "success": "成功",
+    "learnMore": "了解更多",
+    "getStarted": "立即开始"
+  },
+  "footer": {
+    "company": "公司",
+    "about": "关于我们",
+    "philosophy": "理念",
+    "leadership": "领导团队",
+    "careers": "职业机会",
+    "legal": "法律声明",
+    "privacyPolicy": "隐私政策",
+    "termsOfService": "服务条款",
+    "contact": "联系方式",
+    "email": "电子邮件",
+    "followUs": "关注我们",
+    "copyright": "© 2024 Hushh Technologies. 保留所有权利。"
+  },
+  "contact": {
+    "title": "联系我们",
+    "subtitle": "我们期待您的来信",
+    "name": "姓名",
+    "email": "电子邮件",
+    "message": "留言",
+    "send": "发送消息",
+    "success": "消息发送成功！",
+    "error": "消息发送失败。请重试。"
+  },
+  "faq": {
+    "title": "常见问题",
+    "subtitle": "查找常见问题的答案"
+  },
+  "career": {
+    "title": "加入我们的团队",
+    "subtitle": "与我们一起构建数据隐私的未来",
+    "openPositions": "开放职位",
+    "apply": "立即申请"
+  },
+  "language": {
+    "select": "选择语言",
+    "english": "English",
+    "arabic": "العربية",
+    "french": "Français",
+    "chinese": "中文"
+  },
+  "fundA": {
+    "title": "探索基金A",
+    "subtitle": "Alpha 27 现金流王朝",
+    "description": "一种革命性的投资方法，结合人工智能驱动的分析与基本价值投资"
+  },
+  "marquee": {
+    "prefix": "介绍 hushh 27 alpha 投注 —"
+  }
+}

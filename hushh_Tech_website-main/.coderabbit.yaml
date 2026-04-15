@@ -1,0 +1,4 @@
+# Disable CodeRabbit AI reviews to speed up PR merge times
+# CodeRabbit was adding 1-3 min delay on every PR
+reviews:
+  enabled: false

@@ -1,0 +1,129 @@
+{
+  "nav": {
+    "ourPhilosophy": "Notre Philosophie",
+    "fundA": "Fonds A",
+    "community": "Communauté",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "joinUs": "Rejoignez-nous",
+    "careers": "Carrières",
+    "benefits": "Avantages",
+    "login": "Connexion",
+    "logout": "Déconnexion",
+    "viewProfile": "Voir le Profil",
+    "home": "Accueil",
+    "kycStudio": "KYC Studio Alpha",
+    "deleteAccount": "Supprimer le Compte"
+  },
+  "deleteAccount": {
+    "title": "Supprimer le Compte",
+    "warningMessage": "Cette action est permanente et irréversible. Vos données produit seront supprimées définitivement, et seul un audit de paiement minimal désidentifié pourra être conservé.",
+    "willDelete": "Cela supprimera définitivement :",
+    "deleteItem1": "Votre compte et informations de profil",
+    "deleteItem2": "Toutes vos données et préférences d'investisseur",
+    "deleteItem3": "Votre historique de discussion et messages",
+    "deleteItem4": "Tous les documents et vérifications associés",
+    "confirmPrompt": "Tapez DELETE pour confirmer",
+    "cancel": "Annuler",
+    "confirmDelete": "Supprimer le Compte",
+    "deleting": "Suppression...",
+    "successTitle": "Compte Supprimé",
+    "successMessage": "Votre compte et vos données produit ont été définitivement supprimés. Seul un audit de paiement minimal désidentifié pourra être conservé.",
+    "errorTitle": "Échec de la Suppression",
+    "errorMessage": "Échec de la suppression de votre compte. Veuillez réessayer ou contacter le support."
+  },
+  "hero": {
+    "eyebrow": "Investir dans l'Avenir.",
+    "mainTitle": "Le Berkshire Hathaway Propulsé par l'IA.",
+    "mainSubtitle": "Nous combinons l'IA et l'expertise humaine pour investir dans des entreprises exceptionnelles pour une création de valeur à long terme.",
+    "discoverFundA": "Découvrir le Fonds A",
+    "becomeInvestor": "Devenir Investisseur",
+    "investorProfileLabel": "Profil Investisseur",
+    "fundATitle": "Fonds A : La Genèse de Notre Vision.",
+    "fundADescription": "Lancé en 2024, le Fonds A est notre véhicule de revenus axé sur l'IA — systématique, discipliné et conçu pour une création de valeur durable.",
+    "targetingIRR": "Visant",
+    "netIRR": "18-23% TRI net",
+    "withOur": "avec notre approche",
+    "sellTheWall": "Sell the Wall",
+    "approach": ".",
+    "aiFirstInvesting": "Investissement systématique axé sur l'IA.",
+    "provenRiskFramework": "Cadre de risque éprouvé, conçu pour la création de valeur à long terme.",
+    "targetNetIRR": "TRI net cible",
+    "inception": "Création",
+    "disclaimer": "*Inspiré par l'équilibre naturel et des stratégies quantitatives éprouvées.",
+    "learnMoreFundA": "En Savoir Plus sur le Fonds A",
+    "readyToTransform": "Prêt à Transformer Votre Stratégie d'Investissement ?",
+    "joinInvestors": "Rejoignez les investisseurs visionnaires qui construisent leur patrimoine avec notre approche propulsée par l'IA.",
+    "learnAboutMission": "Découvrir Notre Mission",
+    "contactUsToday": "Nous Contacter"
+  },
+  "common": {
+    "welcome": "Bienvenue chez Hushh Technologies",
+    "signInMessage": "Merci de vous être connecté.",
+    "loading": "Chargement...",
+    "submit": "Soumettre",
+    "cancel": "Annuler",
+    "save": "Enregistrer",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "back": "Retour",
+    "next": "Suivant",
+    "continue": "Continuer",
+    "close": "Fermer",
+    "yes": "Oui",
+    "no": "Non",
+    "error": "Erreur",
+    "success": "Succès",
+    "learnMore": "En Savoir Plus",
+    "getStarted": "Commencer"
+  },
+  "footer": {
+    "company": "Entreprise",
+    "about": "À Propos",
+    "philosophy": "Philosophie",
+    "leadership": "Direction",
+    "careers": "Carrières",
+    "legal": "Mentions Légales",
+    "privacyPolicy": "Politique de Confidentialité",
+    "termsOfService": "Conditions d'Utilisation",
+    "contact": "Contact",
+    "email": "Email",
+    "followUs": "Suivez-nous",
+    "copyright": "© 2024 Hushh Technologies. Tous droits réservés."
+  },
+  "contact": {
+    "title": "Contactez-nous",
+    "subtitle": "Nous serions ravis de vous entendre",
+    "name": "Nom",
+    "email": "Email",
+    "message": "Message",
+    "send": "Envoyer le Message",
+    "success": "Message envoyé avec succès !",
+    "error": "Échec de l'envoi du message. Veuillez réessayer."
+  },
+  "faq": {
+    "title": "Questions Fréquemment Posées",
+    "subtitle": "Trouvez des réponses aux questions courantes"
+  },
+  "career": {
+    "title": "Rejoignez Notre Équipe",
+    "subtitle": "Construisez l'avenir de la confidentialité des données avec nous",
+    "openPositions": "Postes Ouverts",
+    "apply": "Postuler Maintenant"
+  },
+  "language": {
+    "select": "Choisir la Langue",
+    "english": "English",
+    "arabic": "العربية",
+    "french": "Français",
+    "chinese": "中文"
+  },
+  "fundA": {
+    "title": "Découvrez le Fonds A",
+    "subtitle": "Alpha 27 Monarchie des Flux de Trésorerie",
+    "description": "Une approche d'investissement révolutionnaire combinant l'analyse pilotée par l'IA avec l'investissement de valeur fondamentale"
+  },
+  "marquee": {
+    "prefix": "Présentation des 27 paris alpha hushh —"
+  }
+}

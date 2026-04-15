@@ -1,0 +1,94 @@
+name: Deploy to PROD
+on:
+  push:
+    branches: [main]
+
+env:
+  SMOKE_BASE_URL: https://hushhtech.com
+  SHARED_SECRETS_PROJECT: "53407187172"
+  VITE_SUPABASE_REDIRECT_URL: https://hushhtech.com/auth/callback
+  VITE_PLAID_REDIRECT_URI: https://hushhtech.com/onboarding/financial-link
+
+jobs:
+  deploy:
+    name: Build & Deploy to Cloud Run (PROD)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # 1. Prepare Node.js and dependencies
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+
+      # 2. Auth with GCP and load shared web-build secrets
+      - uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY_PROD }}
+
+      - uses: google-github-actions/setup-gcloud@v2
+
+      - name: Load web auth build env from Secret Manager
+        shell: bash
+        run: |
+          set -euo pipefail
+          supabase_url="$(gcloud secrets versions access latest --project="$SHARED_SECRETS_PROJECT" --secret="SUPABASE_URL")"
+          supabase_anon_key="$(gcloud secrets versions access latest --project="$SHARED_SECRETS_PROJECT" --secret="SUPABASE_ANON_KEY")"
+          supabase_service_role_key="$(gcloud secrets versions access latest --project="$SHARED_SECRETS_PROJECT" --secret="SUPABASE_SERVICE_ROLE_KEY")"
+          if [ -z "$supabase_url" ] || [ -z "$supabase_anon_key" ]; then
+            echo "::error::Supabase web auth secrets are empty"
+            exit 1
+          fi
+          if [ -z "$supabase_service_role_key" ]; then
+            echo "::error::Supabase service role secret is empty"
+            exit 1
+          fi
+          echo "::add-mask::$supabase_url"
+          echo "::add-mask::$supabase_anon_key"
+          echo "::add-mask::$supabase_service_role_key"
+          printf 'VITE_SUPABASE_URL=%s\n' "$supabase_url" >> "$GITHUB_ENV"
+          printf 'VITE_SUPABASE_ANON_KEY=%s\n' "$supabase_anon_key" >> "$GITHUB_ENV"
+          printf 'SUPABASE_URL=%s\n' "$supabase_url" >> "$GITHUB_ENV"
+          printf 'SUPABASE_SERVICE_ROLE_KEY=%s\n' "$supabase_service_role_key" >> "$GITHUB_ENV"
+
+      # 3. Build Vite app in runner (FAST)
+      - name: Validate client auth env
+        shell: bash
+        run: |
+          missing=0
+          for name in VITE_SUPABASE_URL VITE_SUPABASE_ANON_KEY VITE_SUPABASE_REDIRECT_URL VITE_PLAID_REDIRECT_URI; do
+            if [ -z "${!name}" ]; then
+              echo "::error::$name is required for the web auth build"
+              missing=1
+            fi
+          done
+          if [ "$missing" -ne 0 ]; then
+            exit 1
+          fi
+      - run: npx vite build
+
+      # 4. Deploy pre-built dist/ to Cloud Run (runtime-only Dockerfile)
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy hushh-tech-website \
+            --source . \
+            --project=hushh-tech-prod \
+            --region=us-central1 \
+            --platform=managed \
+            --allow-unauthenticated \
+            --memory=512Mi \
+            --cpu=1 \
+            --min-instances=1 \
+            --max-instances=10 \
+            --port=8080 \
+            --update-env-vars="NODE_ENV=production,SUPABASE_URL=${SUPABASE_URL},SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}" \
+            --clear-base-image \
+            --quiet
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Smoke OAuth startup on deployed host
+        run: node scripts/smoke-oauth-start.mjs "$SMOKE_BASE_URL"
