@@ -93,7 +93,7 @@ describe("InvestorProfile wallet UI", () => {
 
     expect(appleButton).not.toBeNull();
     expect(appleButton?.disabled).toBe(true);
-    expect(container.textContent).toContain("Preview Card");
+    expect(container.textContent).toContain("View Hushh Gold Pass");
     expect(container.textContent).toContain(
       "Available on iPhone in Wallet-supported browsers."
     );

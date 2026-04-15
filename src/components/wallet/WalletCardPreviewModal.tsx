@@ -34,6 +34,16 @@ interface WalletCardPreviewModalProps {
   isGooglePassLoading?: boolean;
 }
 
+/* ── 24K bullion gold surface ── */
+const BULLION_GOLD_SURFACE =
+  "linear-gradient(138deg, #5C3A0A 0%, #8B6914 10%, #C49520 22%, #D4A930 34%, #F5D86A 48%, #ECC94B 58%, #C49520 72%, #8B6914 88%, #5C3A0A 100%)";
+const BULLION_GOLD_GLOW =
+  "radial-gradient(circle at 18% 16%, rgba(255,243,190,0.48), transparent 34%), radial-gradient(circle at 75% 38%, rgba(255,230,140,0.36), transparent 40%), radial-gradient(circle at 85% 80%, rgba(140,100,20,0.28), transparent 34%)";
+const BULLION_GOLD_SHEEN =
+  "linear-gradient(118deg, rgba(255,255,255,0) 12%, rgba(255,249,225,0.2) 28%, rgba(255,255,255,0.65) 47%, rgba(255,243,196,0.18) 62%, rgba(255,255,255,0) 80%)";
+const BULLION_GOLD_FINISH =
+  "linear-gradient(180deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0.06) 16%, transparent 38%, transparent 68%, rgba(60,40,10,0.22) 100%)";
+
 function formatPreviewMembershipId(membershipId: string) {
   const trimmedMembershipId = membershipId.trim();
 
@@ -147,6 +157,8 @@ export default function WalletCardPreviewModal({
   const profileLinkDescription = hasPublicProfileUrl
     ? preview.profileUrl
     : "Shared soon";
+  const sheenTranslateX = enableCardTilt ? rotation.y * 3.4 : 0;
+  const sheenTranslateY = enableCardTilt ? rotation.x * -2.4 : 0;
 
   const handleMouseMove = (event: MouseEvent<HTMLDivElement>) => {
     if (!enableCardTilt) {
@@ -156,8 +168,8 @@ export default function WalletCardPreviewModal({
     const rect = event.currentTarget.getBoundingClientRect();
     const offsetX = event.clientX - rect.left;
     const offsetY = event.clientY - rect.top;
-    const rotateY = ((offsetX / rect.width) - 0.5) * 10;
-    const rotateX = (0.5 - offsetY / rect.height) * 10;
+    const rotateY = ((offsetX / rect.width) - 0.5) * 3.2;
+    const rotateX = (0.5 - offsetY / rect.height) * 3.2;
 
     setRotation({ x: rotateX, y: rotateY });
   };
@@ -200,7 +212,7 @@ export default function WalletCardPreviewModal({
                 fontWeight="600"
                 mb={2}
               >
-                YOUR CARD
+                HUSHH GOLD
               </Text>
               <Text
                 fontFamily="'Playfair Display', serif"
@@ -210,17 +222,17 @@ export default function WalletCardPreviewModal({
                 letterSpacing="-0.02em"
                 color="gray.900"
               >
-                Preview{" "}
+                Hushh Gold{" "}
                 <Text as="span" fontStyle="italic" color="gray.400">
-                  Card
+                  Pass
                 </Text>
               </Text>
               <Text fontSize="sm" color="gray.500" mt={2}>
-                A preview of your Hushh Gold card.
+                A polished gold preview of your Hushh investor membership card.
               </Text>
             </Box>
 
-            <Box perspective="1600px">
+            <Box sx={{ perspective: "1600px" }}>
               <Box
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
@@ -228,10 +240,14 @@ export default function WalletCardPreviewModal({
                 data-tilt-enabled={enableCardTilt ? "true" : "false"}
                 transform={
                   enableCardTilt
-                    ? `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg) scale3d(1.01, 1.01, 1.01)`
+                    ? `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg) scale3d(1.003, 1.003, 1.003)`
                     : "none"
                 }
-                transition={enableCardTilt ? "transform 120ms ease-out" : "none"}
+                transition={
+                  enableCardTilt
+                    ? "transform 180ms cubic-bezier(0.22, 1, 0.36, 1)"
+                    : "none"
+                }
                 sx={enableCardTilt ? { transformStyle: "preserve-3d" } : undefined}
               >
                 <Box
@@ -239,26 +255,41 @@ export default function WalletCardPreviewModal({
                   mx="auto"
                   w="min(100%, 32rem)"
                   aspectRatio={1.586}
-                  borderRadius="28px"
+                  borderRadius="30px"
                   px={{ base: 4, sm: 5, md: 6 }}
                   py={{ base: 4, sm: 5, md: 6 }}
-                  bgGradient="linear(135deg, #443317 0%, #8D6B2F 34%, #D4AF37 62%, #8A6124 100%)"
-                  color="#0B1120"
-                  border="1px solid rgba(255,255,255,0.35)"
-                  boxShadow="0 28px 80px rgba(15, 23, 42, 0.28), inset 0 1px 10px rgba(255, 255, 255, 0.35), inset 0 -24px 44px rgba(0, 0, 0, 0.2)"
+                  background={`${BULLION_GOLD_GLOW}, ${BULLION_GOLD_SURFACE}`}
+                  color="#24190c"
+                  border="1.5px solid rgba(255,240,190,0.6)"
+                  boxShadow="0 32px 80px rgba(40, 28, 8, 0.36), 0 8px 24px rgba(80, 56, 12, 0.2), inset 0 1.5px 0 rgba(255,255,255,0.6), inset 0 -14px 36px rgba(90, 60, 14, 0.22)"
                   overflow="hidden"
                 >
+                  {/* Inner border glow */}
                   <Box
                     position="absolute"
                     inset="10px"
-                    borderRadius="22px"
-                    border="1px solid rgba(255,255,255,0.24)"
+                    borderRadius="24px"
+                    border="1px solid rgba(255,248,220,0.38)"
                     pointerEvents="none"
                   />
                   <Box
                     position="absolute"
                     inset="0"
-                    bg="radial-gradient(circle at 16% 14%, rgba(255,255,255,0.55), transparent 38%), radial-gradient(circle at 88% 82%, rgba(255,255,255,0.22), transparent 30%)"
+                    bg={BULLION_GOLD_FINISH}
+                    pointerEvents="none"
+                  />
+                  <Box
+                    position="absolute"
+                    inset="-12% -18%"
+                    bg={BULLION_GOLD_SHEEN}
+                    opacity={0.84}
+                    transform={`translate3d(${sheenTranslateX}px, ${sheenTranslateY}px, 0)`}
+                    transition={
+                      enableCardTilt
+                        ? "transform 180ms cubic-bezier(0.22, 1, 0.36, 1)"
+                        : "none"
+                    }
+                    mixBlendMode="screen"
                     pointerEvents="none"
                   />
 
@@ -270,21 +301,22 @@ export default function WalletCardPreviewModal({
                     columnGap={{ base: 3, md: 4 }}
                     rowGap={{ base: 3, md: 4 }}
                   >
-                    <VStack align="flex-start" spacing={{ base: 1, md: 1.5 }} minW={0}>
+                    <VStack align="flex-start" spacing={0.5} minW={0}>
                       <Text
                         fontSize="clamp(0.7rem, 0.58rem + 0.5vw, 0.9rem)"
-                        letterSpacing="clamp(0.18em, 0.12em + 0.3vw, 0.34em)"
-                        fontWeight="700"
-                        color="rgba(11, 17, 32, 0.58)"
+                        letterSpacing="clamp(0.22em, 0.14em + 0.3vw, 0.34em)"
+                        fontWeight="800"
+                        color="#000000"
                         noOfLines={1}
                       >
                         {preview.badgeText}
                       </Text>
                       <Text
-                        fontSize="clamp(0.95rem, 0.82rem + 0.7vw, 1.5rem)"
-                        fontWeight="600"
-                        lineHeight="1.1"
-                        noOfLines={2}
+                        fontSize="clamp(0.62rem, 0.56rem + 0.22vw, 0.78rem)"
+                        fontWeight="700"
+                        letterSpacing="0.04em"
+                        color="#000000"
+                        noOfLines={1}
                       >
                         {preview.title}
                       </Text>
@@ -292,20 +324,23 @@ export default function WalletCardPreviewModal({
                     <Box
                       justifySelf="end"
                       alignSelf="start"
-                      px={{ base: 2.5, sm: 3, md: 4 }}
-                      py={{ base: 1.5, md: 2 }}
+                      px={{ base: 2.5, sm: 3, md: 3.5 }}
+                      py={{ base: 1.25, md: 1.75 }}
                       borderRadius="999px"
-                      bg="rgba(255,255,255,0.18)"
-                      border="1px solid rgba(255,255,255,0.28)"
-                      backdropFilter="blur(8px)"
-                      maxW={{ base: "9.5rem", md: "10.75rem" }}
+                      bg="rgba(20, 14, 5, 0.78)"
+                      border="1px solid rgba(200,160,40,0.4)"
+                      backdropFilter="blur(10px)"
+                      maxW={{ base: "8.75rem", md: "9.5rem" }}
+                      boxShadow="inset 0 1px 0 rgba(255,240,180,0.18), 0 8px 20px rgba(40, 28, 8, 0.28)"
                     >
                       <Text
-                        fontSize="clamp(0.62rem, 0.56rem + 0.26vw, 0.84rem)"
+                        fontSize="clamp(0.58rem, 0.54rem + 0.22vw, 0.76rem)"
                         fontWeight="700"
-                        letterSpacing="0.12em"
+                        letterSpacing="0.16em"
                         textAlign="center"
                         noOfLines={1}
+                        color="#E8C547"
+                        textShadow="0 0 8px rgba(232,197,71,0.3)"
                       >
                         GOLD MEMBER
                       </Text>
@@ -317,37 +352,30 @@ export default function WalletCardPreviewModal({
                       align="flex-start"
                       justify="flex-start"
                       spacing={{ base: 1, md: 1.5 }}
-                      pt={{ base: 0.5, md: 1 }}
+                      pt={{ base: 1.5, md: 1.75 }}
                       minW={0}
                     >
+                      <Text
+                        fontSize="clamp(0.74rem, 0.68rem + 0.24vw, 0.92rem)"
+                        fontWeight="700"
+                        letterSpacing="0.12em"
+                        textTransform="uppercase"
+                        color="#000000"
+                        noOfLines={1}
+                      >
+                        {preview.organizationName}
+                      </Text>
                       <Text
                         data-testid="wallet-preview-holder-name"
                         fontSize={holderNameTypography.fontSize}
                         fontWeight="700"
-                        color="rgba(11, 17, 32, 0.9)"
-                        textShadow="0 1px 0 rgba(255, 255, 255, 0.45)"
+                        color="#000000"
                         lineHeight={holderNameTypography.lineHeight}
                         minH={holderNameTypography.minHeight}
                         noOfLines={2}
                         overflowWrap="anywhere"
                       >
                         {preview.holderName}
-                      </Text>
-                      <Text
-                        fontSize="clamp(0.9rem, 0.76rem + 0.65vw, 1.2rem)"
-                        color="rgba(11, 17, 32, 0.74)"
-                        noOfLines={1}
-                      >
-                        {preview.organizationName}
-                      </Text>
-                      <Text
-                        data-testid="wallet-preview-membership-id"
-                        fontSize="clamp(0.72rem, 0.66rem + 0.3vw, 0.96rem)"
-                        fontWeight="600"
-                        color="rgba(11, 17, 32, 0.68)"
-                        noOfLines={1}
-                      >
-                        Membership ID · {previewMembershipId}
                       </Text>
                     </VStack>
 
@@ -356,28 +384,36 @@ export default function WalletCardPreviewModal({
                       gridRow="3"
                       align="flex-start"
                       justify="flex-end"
-                      spacing={{ base: 1.5, md: 2 }}
+                      spacing={{ base: 1.5, md: 1.75 }}
                       minW={0}
                     >
+                      {/* Investor class — luxury dark pill */}
                       <Box
+                        data-testid="wallet-preview-investment-class"
                         px={{ base: 2.5, md: 3 }}
-                        py={{ base: 1.5, md: 2 }}
+                        py={{ base: 1, md: 1.25 }}
                         borderRadius="999px"
-                        bg="rgba(255,255,255,0.16)"
-                        border="1px solid rgba(255,255,255,0.24)"
-                        maxW="100%"
+                        bg="rgba(18, 12, 4, 0.8)"
+                        border="1px solid rgba(220,180,60,0.35)"
+                        boxShadow="inset 0 1px 0 rgba(255,240,180,0.12), 0 4px 12px rgba(30, 20, 6, 0.22)"
                       >
                         <Text
-                          fontSize="clamp(0.65rem, 0.6rem + 0.24vw, 0.88rem)"
+                          fontSize="clamp(0.6rem, 0.56rem + 0.2vw, 0.76rem)"
                           fontWeight="700"
+                          letterSpacing="0.1em"
+                          color="#E8C547"
                           noOfLines={1}
+                          textShadow="0 0 6px rgba(232,197,71,0.25)"
                         >
-                          Investor - {preview.investmentClass}
+                          Investor · {preview.investmentClass}
                         </Text>
                       </Box>
                       <Text
-                        fontSize="clamp(0.74rem, 0.69rem + 0.24vw, 0.95rem)"
-                        color="rgba(11, 17, 32, 0.7)"
+                        data-testid="wallet-preview-email"
+                        fontSize="clamp(0.66rem, 0.62rem + 0.22vw, 0.82rem)"
+                        fontWeight="700"
+                        letterSpacing="0.03em"
+                        color="#000000"
                         noOfLines={1}
                       >
                         {preview.email}
@@ -391,10 +427,11 @@ export default function WalletCardPreviewModal({
                       alignSelf="end"
                       data-testid="wallet-preview-qr"
                       boxSize={`${qrFrameSize}px`}
-                      bg="whiteAlpha.920"
+                      bg="rgba(255,252,247,0.98)"
+                      border="1px solid rgba(154, 109, 29, 0.18)"
                       borderRadius={{ base: "18px", md: "22px" }}
                       p={`${qrPadding}px`}
-                      boxShadow="0 10px 24px rgba(15, 23, 42, 0.16)"
+                      boxShadow="0 12px 28px rgba(92, 63, 13, 0.18), inset 0 1px 0 rgba(255,255,255,0.76)"
                     >
                       <Box boxSize={`${qrSize}px`}>
                         <QRCodeSVG

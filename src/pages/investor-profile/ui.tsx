@@ -159,7 +159,7 @@ function InvestorProfilePage() {
                   borderColor="gray.300"
                   h="44px"
                 >
-                  Preview Card
+                  View Hushh Gold Pass
                 </Button>
                 <HStack spacing={4} justify="center" w="full">
                 <Button

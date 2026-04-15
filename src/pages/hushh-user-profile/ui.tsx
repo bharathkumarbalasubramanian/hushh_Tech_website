@@ -396,7 +396,7 @@ const HushhUserProfilePage: React.FC = () => {
             onClick={openWalletPreview}
             className="mb-4 w-full border border-gray-200 rounded-2xl py-3 px-4 flex items-center justify-center gap-2 hover:border-hushh-blue/30 transition-colors"
           >
-            <span className="text-xs font-medium">Preview Card</span>
+            <span className="text-xs font-medium">View Hushh Gold Pass</span>
           </button>
           <div className="grid grid-cols-2 gap-4">
             <button

@@ -155,14 +155,15 @@ describe("WalletCardPreviewModal", () => {
       onAddToAppleWallet: () => undefined,
     });
 
-    expect(document.body.textContent).toContain("Preview Card");
+    expect(document.body.textContent).toContain("Hushh Gold Pass");
     expect(document.body.textContent).toContain(
-      "A preview of your Hushh Gold card."
+      "A polished gold preview of your Hushh investor membership card."
     );
     expect(document.body.textContent).toContain("Details");
     expect(document.body.textContent).toContain("Profile");
     expect(document.body.textContent).toContain("Add to Apple Wallet");
     expect(document.body.textContent).toContain("Google Wallet soon.");
+    expect(document.body.textContent).toContain(preview.title);
     expect(document.body.textContent).not.toContain(
       "This is a browser preview of your Hushh Gold Wallet card."
     );
@@ -210,9 +211,16 @@ describe("WalletCardPreviewModal", () => {
     expect(mobileQrNode).not.toBeNull();
     expect(document.body.textContent).toContain(longPreview.holderName);
     expect(previewShell?.getAttribute("data-tilt-enabled")).toBe("false");
-    expect(membershipPreview?.textContent).toContain("Membership ID · ");
-    expect(membershipPreview?.textContent).toContain("…");
-    expect(membershipPreview?.textContent).toContain("2597e6b8".slice(-6));
+    expect(document.body.textContent).toContain(longPreview.title);
+    /* Member ID moved off-card into the Details section */
+    expect(membershipPreview).toBeNull();
+    expect(
+      document.querySelector('[data-testid="wallet-preview-investment-class"]')
+        ?.textContent
+    ).toContain(`Investor · ${longPreview.investmentClass}`);
+    expect(
+      document.querySelector('[data-testid="wallet-preview-email"]')?.textContent
+    ).toContain(longPreview.email);
     expect(document.body.textContent).toContain(`ID · ${longPreview.membershipId}`);
     expect(profileLinkTile?.getAttribute("href")).toBe(longPreview.profileUrl);
     expect(profileLinkTile?.getAttribute("target")).toBe("_blank");
@@ -241,6 +249,7 @@ describe("WalletCardPreviewModal", () => {
     expect(desktopPreviewShell?.getAttribute("data-tilt-enabled")).toBe("true");
     expect(document.body.textContent).toContain("Add to Apple Wallet");
     expect(document.body.textContent).toContain("Google Wallet soon.");
+    expect(document.body.textContent).toContain("GOLD MEMBER");
   });
 
   it("renders the profile tile as unavailable when there is no slug-backed public URL", async () => {

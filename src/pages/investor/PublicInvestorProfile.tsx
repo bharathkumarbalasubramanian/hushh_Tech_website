@@ -431,7 +431,7 @@ const PublicInvestorProfilePage: React.FC = () => {
                     onClick={() => setIsWalletPreviewOpen(true)}
                     className="mt-3 w-full border border-gray-200 rounded-full px-5 py-3 text-sm font-medium text-black hover:bg-gray-50 transition-colors"
                   >
-                    Preview Card
+                    View Hushh Gold Pass
                   </button>
                   {!appleWalletSupported && (
                     <p className="mt-3 text-center text-xs text-gray-500 font-light">
